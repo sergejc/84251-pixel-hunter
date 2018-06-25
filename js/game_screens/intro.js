@@ -2,7 +2,7 @@ import {changeScreen, render} from '../utils';
 import greeting from './greeting';
 import getFooter from '../page_elements/footer';
 
-const getGameScreen = () => {
+export default () => {
   const html = `
     <div id="main" class="central__content">
     <div id="intro" class="intro">
@@ -12,13 +12,11 @@ const getGameScreen = () => {
     </div>
     ${getFooter()}`;
 
-  return render(html);
+  const element = render(html);
+
+  element.querySelector(`.intro__asterisk`).addEventListener(`click`, () => {
+    changeScreen(greeting);
+  });
+
+  changeScreen(element);
 };
-
-const intro = getGameScreen();
-
-intro.querySelector(`.intro__asterisk`).addEventListener(`click`, () => {
-  changeScreen(greeting);
-});
-
-export default intro;

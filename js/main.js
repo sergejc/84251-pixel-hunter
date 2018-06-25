@@ -1,4 +1,3 @@
-import {changeScreen} from './utils';
-import intro from './game_screens/intro';
+import introScreen from './game_screens/intro';
 
-changeScreen(intro);
+introScreen();
