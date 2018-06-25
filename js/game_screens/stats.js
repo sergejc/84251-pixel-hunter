@@ -1,4 +1,4 @@
-import {getElementFromTemplate, render} from '../utils';
+import {render, changeScreen} from '../utils';
 import intro from './intro';
 import headerStatic from '../page_elements/header_static';
 
@@ -116,10 +116,10 @@ const html = `
   </footer>
 `;
 
-const stats = getElementFromTemplate(html);
+const stats = render(html);
 
 stats.querySelector(`.back`).addEventListener(`click`, () => {
-  render(intro);
+  changeScreen(intro);
 });
 
 export default stats;

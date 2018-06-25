@@ -1,4 +1,4 @@
-import {getElementFromTemplate, render} from '../utils';
+import {render, changeScreen} from '../utils';
 import rules from './rules';
 import getFooter from '../page_elements/footer';
 
@@ -18,13 +18,13 @@ const getGameScreen = () => {
     </div>
     ${getFooter()}`;
 
-  return getElementFromTemplate(html);
+  return render(html);
 };
 
 const greeting = getGameScreen();
 
 greeting.querySelector(`.greeting__continue`).addEventListener(`click`, () => {
-  render(rules);
+  changeScreen(rules);
 });
 
 export default greeting;

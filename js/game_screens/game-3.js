@@ -1,4 +1,4 @@
-import {getElementFromTemplate, render} from '../utils';
+import {render, changeScreen} from '../utils';
 import stats from './stats';
 import intro from './intro';
 import getHeader from '../page_elements/header';
@@ -25,19 +25,19 @@ const getGameScreen = () => {
     </div>
     ${getFooter()}`;
 
-  return getElementFromTemplate(html);
+  return render(html);
 };
 
 const game3 = getGameScreen();
 
 game3.querySelector(`.back`).addEventListener(`click`, () => {
-  render(intro);
+  changeScreen(intro);
 });
 
 const answers = game3.querySelectorAll(`.game__option`);
 Array.from(answers).forEach((btn) => {
   btn.addEventListener(`click`, () => {
-    render(stats);
+    changeScreen(stats);
   });
 });
 

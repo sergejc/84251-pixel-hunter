@@ -1,4 +1,4 @@
-import {render, getElementFromTemplate} from '../utils';
+import {changeScreen, render} from '../utils';
 import greeting from './greeting';
 import getFooter from '../page_elements/footer';
 
@@ -12,13 +12,13 @@ const getGameScreen = () => {
     </div>
     ${getFooter()}`;
 
-  return getElementFromTemplate(html);
+  return render(html);
 };
 
 const intro = getGameScreen();
 
 intro.querySelector(`.intro__asterisk`).addEventListener(`click`, () => {
-  render(greeting);
+  changeScreen(greeting);
 });
 
 export default intro;

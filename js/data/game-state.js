@@ -1,18 +1,13 @@
-import renderIntro from '../page_elements/render-intro.js';
-
-const initialState = Object.freeze({
-  level: 1,
+const initState = Object.freeze({
+  level: `screen-0`,
   lives: 3,
   time: 30,
   stats: []
 });
 
-const levels = [
-  {
-    title: ``,
-    render: renderIntro,
-    data: ``
+const levels = {
+  'screen-0': {
   }
-];
+};
 
-export {initialState, levels};
+export {initState, levels};

@@ -1,4 +1,4 @@
-import {getElementFromTemplate, render} from '../utils';
+import {render, changeScreen} from '../utils';
 import game1 from './game-1';
 import intro from './intro';
 import headerStatic from '../page_elements/header_static';
@@ -25,18 +25,18 @@ const getGameScreen = () => {
     </div>
     ${getFooter()}`;
 
-  return getElementFromTemplate(html);
+  return render(html);
 };
 
 const rules = getGameScreen();
 
 rules.querySelector(`.back`).addEventListener(`click`, () => {
-  render(intro);
+  changeScreen(intro);
 });
 
 rules.querySelector(`.rules__form`).addEventListener(`submit`, (evt) => {
   evt.preventDefault();
-  render(game1);
+  changeScreen(game1);
 });
 
 const submit = rules.querySelector(`.rules__button`);

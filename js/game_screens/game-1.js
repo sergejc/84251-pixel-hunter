@@ -1,4 +1,4 @@
-import {getElementFromTemplate, render} from '../utils';
+import {render, changeScreen} from '../utils';
 import getHeader from '../page_elements/header';
 import getFooter from '../page_elements/footer';
 import game2 from './game-2';
@@ -38,14 +38,14 @@ const getGameScreen = () => {
     </div>
     ${getFooter()}`;
 
-  return getElementFromTemplate(html);
+  return render(html);
 };
 
 const game1 = getGameScreen();
 const buttons = game1.querySelectorAll(`input[type="radio"]`);
 
 game1.querySelector(`.back`).addEventListener(`click`, () => {
-  render(intro);
+  changeScreen(intro);
 });
 
 const isFormValid = () => {
@@ -59,7 +59,7 @@ const isFormValid = () => {
 Array.from(buttons).forEach((btn) => {
   btn.addEventListener(`change`, () => {
     if (isFormValid()) {
-      render(game2);
+      changeScreen(game2);
     }
   });
 });
