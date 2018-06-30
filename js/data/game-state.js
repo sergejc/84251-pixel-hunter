@@ -22,7 +22,7 @@ const IMAGE_TYPE = {
 const levels = {
   'level-1': {
     render: screen1,
-    updateGame: updateGame1,
+    getState: updateGame1,
     data: [
       {
         src: `https://k42.kn3.net/CF42609C8.jpg`,
@@ -35,7 +35,7 @@ const levels = {
   },
   'level-2': {
     render: screen2,
-    updateGame: updateGame2,
+    getState: updateGame2,
     data: [
       {
         src: `https://k42.kn3.net/D2F0370D6.jpg`,
@@ -45,7 +45,7 @@ const levels = {
   },
   'level-3': {
     render: screen3,
-    updateGame: updateGame3,
+    getState: updateGame3,
     data: [
       {
         src: `https://k42.kn3.net/D2F0370D6.jpg`,
@@ -64,7 +64,7 @@ const levels = {
 
   'level-4': {
     render: screen1,
-    updateGame: updateGame1,
+    getState: updateGame1,
     data: [
       {
         src: `https://k42.kn3.net/CF42609C8.jpg`,
@@ -78,7 +78,7 @@ const levels = {
   },
   'level-5': {
     render: screen2,
-    updateGame: updateGame2,
+    getState: updateGame2,
     data: [
       {
         src: `https://i.imgur.com/DiHM5Zb.jpg`,
@@ -88,7 +88,7 @@ const levels = {
   },
   'level-6': {
     render: screen3,
-    updateGame: updateGame3,
+    getState: updateGame3,
     data: [
       {
         src: `https://k42.kn3.net/D2F0370D6.jpg`,
@@ -107,7 +107,7 @@ const levels = {
 
   'level-7': {
     render: screen1,
-    updateGame: updateGame1,
+    getState: updateGame1,
     data: [
       {
         src: `http://i.imgur.com/1KegWPz.jpg`,
@@ -121,7 +121,7 @@ const levels = {
   },
   'level-8': {
     render: screen2,
-    updateGame: updateGame2,
+    getState: updateGame2,
     data: [
       {
         src: `http://i.imgur.com/1KegWPz.jpg`,
@@ -131,7 +131,7 @@ const levels = {
   },
   'level-9': {
     render: screen3,
-    updateGame: updateGame3,
+    getState: updateGame3,
     data: [
       {
         src: `http://i.imgur.com/1KegWPz.jpg`,
@@ -150,7 +150,7 @@ const levels = {
 
   'level-10': {
     render: screen1,
-    updateGame: updateGame1,
+    getState: updateGame1,
     data: [
       {
         src: `https://i.imgur.com/DiHM5Zb.jpg`,

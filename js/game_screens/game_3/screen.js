@@ -1,4 +1,5 @@
 import {getNewState} from '../../utils';
+import gameStats from '../../page_elements/game-stats';
 
 const screen3 = (game, level) => {
   return `<div class="game">
@@ -15,31 +16,21 @@ const screen3 = (game, level) => {
     </div>
   </form>
   <div class="stats">
+    ${gameStats(game.stats)}
   </div>
 </div>`;
 };
 
-const updateGame3 = (game, level) => {
-  const element = document.querySelector(`[name="question1"]:checked`);
+const updateGame3 = (game, level, evt) => {
+  const attribute = evt.target.querySelector(`img`).getAttribute(`alt`);
 
-  if (!element) {
-    return {isNext: false, game};
-  }
-  const answer = element.value === level.data[0].type;
-  if (answer) {
-    game.stats.push(`normal`);
-  } else {
-    game.stats.push(`wrong`);
+  if (!attribute) {
+    throw Error(`the result is not valid`);
   }
 
-  const result = {
-    lives: answer ? game.level : game.lives - 1,
-  };
-
-  return {
-    isNext: true,
-    game: Object.assign({}, game, result)
-  };
+  const num = attribute.replace(/[^0-9]/g, ``);
+  const answer = level.data[num - 1].type === `paint`;
+  return getNewState(answer, game);
 };
 
 export {screen3, updateGame3};

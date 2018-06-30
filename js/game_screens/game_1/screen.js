@@ -1,4 +1,5 @@
 import {getNewState} from '../../utils';
+import gameStats from '../../page_elements/game-stats';
 
 const screen1 = (game, level) => {
   return `<div class="game">
@@ -27,6 +28,9 @@ const screen1 = (game, level) => {
           </label>
         </div>
       </form>
+      <div class="stats">
+        ${gameStats(game.stats)}
+      </div>
     </div>`;
 };
 
@@ -34,8 +38,8 @@ const isFormValid = (elements) => {
   return elements.length === 2;
 };
 
-const updateGame1 = (game, level, container) => {
-  const elements = container.querySelectorAll(`input[type="radio"]:checked`);
+const updateGame1 = (game, level) => {
+  const elements = document.querySelectorAll(`input[type="radio"]:checked`);
 
   if (!isFormValid(elements)) {
     throw Error(`the input result is not valid`);
