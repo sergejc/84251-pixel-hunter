@@ -1,4 +1,4 @@
-const render = (html) => {
+const render = (html = ``) => {
   const template = document.createElement(`div`);
   template.innerHTML = html.trim();
 
@@ -12,4 +12,15 @@ const changeScreen = (element) => {
   parent.appendChild(element);
 };
 
-export {render, changeScreen};
+const DEFAULT_TIME = 30;
+
+const getNewState = (answer, game) => {
+  return {
+    lives: answer ? game.lives : game.lives - 1,
+    level: game.level + 1,
+    time: DEFAULT_TIME,
+    stats: game.stats.concat({answer, time: game.time})
+  };
+};
+
+export {render, changeScreen, getNewState};

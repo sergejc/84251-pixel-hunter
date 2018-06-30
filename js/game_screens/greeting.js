@@ -1,8 +1,8 @@
 import {render, changeScreen} from '../utils';
-import rules from './rules';
 import getFooter from '../page_elements/footer';
+import rulesScreen from './rules';
 
-const getGameScreen = () => {
+export default () => {
   const html = `<div class="greeting central--blur">
       <div class="greeting__logo"><img src="img/logo_big.png" width="201" height="89" alt="Pixel Hunter"></div>
       <h1 class="greeting__asterisk">*</h1>
@@ -18,13 +18,15 @@ const getGameScreen = () => {
     </div>
     ${getFooter()}`;
 
-  return render(html);
+  const element = render(html);
+
+  // next screen handler
+  const clickHandler = (evt) => {
+    evt.currentTarget.removeEventListener(`click`, clickHandler);
+    rulesScreen();
+  };
+
+  element.querySelector(`.greeting__continue`).addEventListener(`click`, clickHandler);
+
+  changeScreen(element);
 };
-
-const greeting = getGameScreen();
-
-greeting.querySelector(`.greeting__continue`).addEventListener(`click`, () => {
-  changeScreen(rules);
-});
-
-export default greeting;

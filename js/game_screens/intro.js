@@ -1,6 +1,6 @@
 import {changeScreen, render} from '../utils';
-import greeting from './greeting';
 import getFooter from '../page_elements/footer';
+import greetingScreen from './greeting';
 
 export default () => {
   const html = `
@@ -14,9 +14,13 @@ export default () => {
 
   const element = render(html);
 
-  element.querySelector(`.intro__asterisk`).addEventListener(`click`, () => {
-    changeScreen(greeting);
-  });
+  // next screen handler
+  const clickHandler = (evt) => {
+    evt.currentTarget.removeEventListener(`click`, clickHandler);
+    greetingScreen();
+  };
+
+  element.querySelector(`.intro__asterisk`).addEventListener(`click`, clickHandler);
 
   changeScreen(element);
 };

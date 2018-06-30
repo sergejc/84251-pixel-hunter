@@ -1,10 +1,10 @@
 import {render, changeScreen} from '../utils';
-import game1 from './game-1';
-import intro from './intro';
+import startGame from './game';
+import introScreen from './intro';
 import headerStatic from '../page_elements/header_static';
 import getFooter from '../page_elements/footer';
 
-const getGameScreen = () => {
+export default () => {
   const html = `
     ${headerStatic}
     <div class="rules">
@@ -25,27 +25,35 @@ const getGameScreen = () => {
     </div>
     ${getFooter()}`;
 
-  return render(html);
+  const element = render(html);
+
+  // back button hanler
+  const backHandler = (evt) => {
+    evt.currentTarget.removeEventListener(`click`, backHandler);
+    introScreen();
+  };
+  element.querySelector(`.back`).addEventListener(`click`, backHandler);
+
+  // next screen handler
+  const submitHander = (evt) => {
+    evt.preventDefault();
+    evt.currentTarget.removeEventListener(`click`, submitHander);
+    startGame();
+  };
+  element.querySelector(`.rules__form`).addEventListener(`submit`, submitHander);
+
+  // input name handler
+  const submit = element.querySelector(`.rules__button`);
+  const keyUpHandler = (evt) => {
+    evt.currentTarget.removeEventListener(`click`, keyUpHandler);
+
+    if (evt.target.value) {
+      submit.removeAttribute(`disabled`);
+    } else {
+      submit.setAttribute(`disabled`, true);
+    }
+  };
+  element.querySelector(`.rules__input`).addEventListener(`keyup`, keyUpHandler);
+
+  changeScreen(element);
 };
-
-const rules = getGameScreen();
-
-rules.querySelector(`.back`).addEventListener(`click`, () => {
-  changeScreen(intro);
-});
-
-rules.querySelector(`.rules__form`).addEventListener(`submit`, (evt) => {
-  evt.preventDefault();
-  changeScreen(game1);
-});
-
-const submit = rules.querySelector(`.rules__button`);
-rules.querySelector(`.rules__input`).addEventListener(`keyup`, (evt) => {
-  if (evt.target.value) {
-    submit.removeAttribute(`disabled`);
-  } else {
-    submit.setAttribute(`disabled`, true);
-  }
-});
-
-export default rules;
