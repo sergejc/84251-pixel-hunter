@@ -1,5 +1,5 @@
 import {getNewState} from '../../utils';
-import gameStats from '../../page_elements/game-stats';
+import {gameStats} from '../../page_elements/game-stats';
 
 const screen1 = (game, level) => {
   return `<div class="game">

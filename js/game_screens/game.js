@@ -3,6 +3,7 @@ import {INITIAL_GAME, levels} from '../data/game-state';
 import header from '../page_elements/header';
 import footer from '../page_elements/footer';
 import introScreen from './intro';
+import statsScreen from './game-over';
 
 let game;
 
@@ -40,7 +41,7 @@ export default () => {
   const gameOver = () => {
     gameContainerElement.removeEventListener(`click`, onGameChange);
     gameContainerElement.removeEventListener(`change`, onGameChange);
-    alert(`game over!!!`);
+    statsScreen(game);
   };
 
   const onGameChange = (evt) => {
@@ -51,7 +52,7 @@ export default () => {
       game = currentLevel.getState(game, currentLevel, evt);
 
       // game over
-      if (!game.lives) {
+      if (game.lives < 0 || !nextLevel) {
         gameOver();
         return;
       }

@@ -22,11 +22,17 @@ const getGameStatus = (stat) => {
   return getTypeByTime(stat.time);
 };
 
+const convertToTypes = (stats) => {
+  return [...Array(10).keys()].map((key) => {
+    return getGameStatus(stats[key]);
+  });
+};
+
 const gameStats = (stats) => {
-  const html = [...Array(10).keys()].map((key) => {
-    return `<li class="stats__result stats__result--${getGameStatus(stats[key])}"></li>`;
+  const html = convertToTypes(stats).map((value) => {
+    return `<li class="stats__result stats__result--${value}"></li>`;
   });
   return `<ul class="stats">${html.join(``)}</ul>`;
 };
 
-export default gameStats;
+export {gameStats, convertToTypes};
