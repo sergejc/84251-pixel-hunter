@@ -17,7 +17,7 @@ gameContainerElement.appendChild(headerElement);
 gameContainerElement.appendChild(levelElement);
 gameContainerElement.appendChild(footerElement);
 
-const updateScreen = (levelHtml) => {
+const updateGame = (levelHtml) => {
   headerElement.innerHTML = header(game);
   levelElement.innerHTML = levelHtml;
 };
@@ -31,10 +31,12 @@ const backHandler = (evt) => {
   }
 };
 
+const getLevel = (levelNum) => levels[`level-${levelNum}`];
+
 const onGameChange = (evt) => {
   try {
-    const currentLevel = levels[`level-${game.level}`];
-    const nextLevel = levels[`level-${game.level + 1}`];
+    const currentLevel = getLevel(game.level);
+    const nextLevel = getLevel(game.level + 1);
 
     game = currentLevel.getState(game, currentLevel, evt);
 
@@ -44,7 +46,7 @@ const onGameChange = (evt) => {
       return;
     }
 
-    updateScreen(nextLevel.render(game, nextLevel));
+    updateGame(nextLevel.render(game, nextLevel));
   } catch (error) {
     // ups something unexpected happen
   }
@@ -60,15 +62,13 @@ gameContainerElement.addEventListener(`click`, onGameChange);
 gameContainerElement.addEventListener(`click`, backHandler);
 gameContainerElement.addEventListener(`change`, onGameChange);
 
-const getLevel = (levelNumber) => levels[`level-${levelNumber}`];
-
 let game;
+
 
 export default () => {
   game = Object.assign({}, INITIAL_GAME);
 
-  changeScreen(gameContainerElement);
-
   const currentLevel = getLevel(game.level);
-  updateScreen(currentLevel.render(game, currentLevel));
+  updateGame(currentLevel.render(game, currentLevel));
+  changeScreen(gameContainerElement);
 };
