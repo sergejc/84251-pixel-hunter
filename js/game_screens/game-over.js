@@ -108,7 +108,6 @@ const renderFigures = (game, score) => {
 
 export default (game) => {
   const score = getScore(game);
-  debugger;
 
   const html = `
   ${headerStatic}
