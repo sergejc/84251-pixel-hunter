@@ -1,4 +1,4 @@
-const getElementFromTemplate = (html) => {
+const render = (html = ``) => {
   const template = document.createElement(`div`);
   template.innerHTML = html.trim();
 
@@ -7,9 +7,20 @@ const getElementFromTemplate = (html) => {
 
 const parent = document.querySelector(`.central`);
 
-const render = (element) => {
+const changeScreen = (element) => {
   parent.innerHTML = ``;
   parent.appendChild(element);
 };
 
-export {getElementFromTemplate, render};
+const DEFAULT_TIME = 30;
+
+const getNewState = (answer, game) => {
+  return {
+    lives: answer ? game.lives : game.lives - 1,
+    level: game.level + 1,
+    time: DEFAULT_TIME,
+    stats: game.stats.concat({answer, time: game.time})
+  };
+};
+
+export {render, changeScreen, getNewState};

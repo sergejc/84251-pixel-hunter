@@ -1,4 +1,3 @@
-import {render} from './utils';
-import intro from './intro';
+import introScreen from './game_screens/intro';
 
-render(intro);
+introScreen();

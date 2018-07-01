@@ -1,6 +1,5 @@
 import {assert, expect} from 'chai';
-import getScore from './reward';
-import timer from './timer';
+import getScore from '../reward';
 
 describe(`getScore funtionality`, () => {
 
@@ -75,23 +74,5 @@ describe(`getScore funtionality`, () => {
       [true, 10]
     ];
     expect(getScore(answers, 3)).to.be.equal(1150);
-  });
-});
-
-
-describe(`timer funtionality`, () => {
-  it(`it should notify when timer is over`, () => {
-    expect(timer(0).tick()).to.be.equal(true);
-  });
-
-  it(`it should notify that timer is over when negative number is provided`, () => {
-    expect(timer(-2).tick()).to.be.equal(true);
-  });
-
-  it(`will run twice before timer expires`, () => {
-    const t = timer(2);
-    expect(t.tick()).to.be.equal(false);
-    expect(t.tick()).to.be.equal(false);
-    expect(t.tick()).to.be.equal(true);
   });
 });
