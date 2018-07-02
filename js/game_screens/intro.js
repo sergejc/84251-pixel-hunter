@@ -1,5 +1,5 @@
 import {changeScreen, render} from '../utils';
-import getFooter from '../page_elements/footer';
+import footer from '../page_elements/footer';
 import greetingScreen from './greeting';
 
 export default () => {
@@ -10,7 +10,7 @@ export default () => {
       <p class="intro__motto"><sup>*</sup> Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.</p>
     </div>
     </div>
-    ${getFooter()}`;
+    ${footer}`;
 
   const element = render(html);
 

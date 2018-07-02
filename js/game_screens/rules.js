@@ -2,7 +2,7 @@ import {render, changeScreen} from '../utils';
 import startGame from './game';
 import introScreen from './intro';
 import headerStatic from '../page_elements/header_static';
-import getFooter from '../page_elements/footer';
+import footer from '../page_elements/footer';
 
 export default () => {
   const html = `
@@ -23,7 +23,7 @@ export default () => {
         <button class="rules__button  continue" type="submit" disabled>Go!</button>
       </form>
     </div>
-    ${getFooter()}`;
+    ${footer}`;
 
   const element = render(html);
 

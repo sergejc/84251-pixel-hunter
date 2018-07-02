@@ -1,5 +1,4 @@
-const getFooter = () => {
-  return `<footer class="footer">
+const footer = `<footer class="footer">
     <a href="https://htmlacademy.ru" class="social-link social-link--academy">HTML Academy</a>
     <span class="footer__made-in">Сделано в <a href="https://htmlacademy.ru" class="footer__link">HTML Academy</a> &copy; 2016</span>
     <div class="footer__social-links">
@@ -9,6 +8,5 @@ const getFooter = () => {
       <a href="https://vk.com/htmlacademy" class="social-link  social-link--vk">Вконтакте</a>
     </div>
   </footer>`;
-};
 
-export default getFooter;
+export default footer;

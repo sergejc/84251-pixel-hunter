@@ -1,6 +1,4 @@
-import {screen1, updateGame1} from '../game_screens/game_1/screen';
-import {screen2, updateGame2} from '../game_screens/game_2/screen';
-import {screen3, updateGame3} from '../game_screens/game_3/screen';
+import LevelView1 from '../game_screens/game_1/screen';
 
 const INITIAL_GAME = Object.freeze({
   level: 1,
@@ -9,9 +7,30 @@ const INITIAL_GAME = Object.freeze({
   stats: []
 });
 
-const IMAGE_TYPE = {
+const ImageType = {
   PHOTO: `photo`,
   PAINT: `paint`
+};
+
+const Result = {
+  NEXT: 1,
+  DIE: 2,
+  NOOP: 3
+};
+
+const GameSpeed = {
+  SLOW: 20,
+  FAST: 10
+};
+
+const ATTEMPTS_COUNT = 10;
+
+const AnswerType = {
+  FAST: `fast`,
+  SLOW: `slow`,
+  CORRECT: `correct`,
+  WRONG: `wrong`,
+  UNKNOWN: `unknown`
 };
 
 /**
@@ -21,147 +40,137 @@ const IMAGE_TYPE = {
  */
 const levels = {
   'level-1': {
-    render: screen1,
-    getState: updateGame1,
+    view: (game, level) => new LevelView1(game, level),
     data: [
       {
         src: `https://k42.kn3.net/CF42609C8.jpg`,
-        type: IMAGE_TYPE.PAINT
+        type: ImageType.PAINT
       },
       {
         src: `http://i.imgur.com/1KegWPz.jpg`,
-        type: IMAGE_TYPE.PHOTO
+        type: ImageType.PHOTO
       }]
   },
   'level-2': {
-    render: screen2,
-    getState: updateGame2,
+    view: (game, level) => new LevelView1(game, level),
     data: [
       {
         src: `https://k42.kn3.net/D2F0370D6.jpg`,
-        type: IMAGE_TYPE.PAINT
+        type: ImageType.PAINT
       }
     ]
   },
   'level-3': {
-    render: screen3,
-    getState: updateGame3,
+    view: (game, level) => new LevelView1(game, level),
     data: [
       {
         src: `https://k42.kn3.net/D2F0370D6.jpg`,
-        type: IMAGE_TYPE.PAINT
+        type: ImageType.PAINT
       },
       {
         src: `http://i.imgur.com/1KegWPz.jpg`,
-        type: IMAGE_TYPE.PHOTO
+        type: ImageType.PHOTO
       },
       {
         src: `http://i.imgur.com/DKR1HtB.jpg`,
-        type: IMAGE_TYPE.PHOTO
+        type: ImageType.PHOTO
       }
     ]
   },
 
   'level-4': {
-    render: screen1,
-    getState: updateGame1,
+    view: (game, level) => new LevelView1(game, level),
     data: [
       {
         src: `https://k42.kn3.net/CF42609C8.jpg`,
-        type: IMAGE_TYPE.PAINT
+        type: ImageType.PAINT
       },
       {
         src: `http://i.imgur.com/1KegWPz.jpg`,
-        type: IMAGE_TYPE.PHOTO
+        type: ImageType.PHOTO
       }
     ]
   },
   'level-5': {
-    render: screen2,
-    getState: updateGame2,
+    view: (game, level) => new LevelView1(game, level),
     data: [
       {
         src: `https://i.imgur.com/DiHM5Zb.jpg`,
-        type: IMAGE_TYPE.PHOTO
+        type: ImageType.PHOTO
       }
     ]
   },
   'level-6': {
-    render: screen3,
-    getState: updateGame3,
+    view: (game, level) => new LevelView1(game, level),
     data: [
       {
         src: `https://k42.kn3.net/D2F0370D6.jpg`,
-        type: IMAGE_TYPE.PAINT
+        type: ImageType.PAINT
       },
       {
         src: `http://i.imgur.com/DKR1HtB.jpg`,
-        type: IMAGE_TYPE.PHOTO
+        type: ImageType.PHOTO
       },
       {
         src: `https://i.imgur.com/DiHM5Zb.jpg`,
-        type: IMAGE_TYPE.PHOTO
+        type: ImageType.PHOTO
       }
     ]
   },
 
   'level-7': {
-    render: screen1,
-    getState: updateGame1,
+    view: (game, level) => new LevelView1(game, level),
     data: [
       {
         src: `http://i.imgur.com/1KegWPz.jpg`,
-        type: IMAGE_TYPE.PHOTO
+        type: ImageType.PHOTO
       },
       {
         src: `https://k42.kn3.net/CF42609C8.jpg`,
-        type: IMAGE_TYPE.PAINT
+        type: ImageType.PAINT
       }
     ]
   },
   'level-8': {
-    render: screen2,
-    getState: updateGame2,
+    view: (game, level) => new LevelView1(game, level),
     data: [
       {
         src: `http://i.imgur.com/1KegWPz.jpg`,
-        type: IMAGE_TYPE.PHOTO
+        type: ImageType.PHOTO
       }
     ]
   },
   'level-9': {
-    render: screen3,
-    getState: updateGame3,
+    view: (game, level) => new LevelView1(game, level),
     data: [
       {
         src: `http://i.imgur.com/1KegWPz.jpg`,
-        type: IMAGE_TYPE.PAINT
+        type: ImageType.PAINT
       },
       {
         src: `http://i.imgur.com/DKR1HtB.jpg`,
-        type: IMAGE_TYPE.PHOTO
+        type: ImageType.PHOTO
       },
       {
         src: `https://i.imgur.com/DiHM5Zb.jpg`,
-        type: IMAGE_TYPE.PHOTO
+        type: ImageType.PHOTO
       }
     ]
   },
 
   'level-10': {
-    render: screen1,
-    getState: updateGame1,
+    view: (game, level) => new LevelView1(game, level),
     data: [
       {
         src: `https://i.imgur.com/DiHM5Zb.jpg`,
-        type: IMAGE_TYPE.PHOTO
+        type: ImageType.PHOTO
       },
       {
         src: `https://k32.kn3.net/5C7060EC5.jpg`,
-        type: IMAGE_TYPE.PAINT
+        type: ImageType.PAINT
       }
     ]
   }
 };
 
-export {INITIAL_GAME, levels};
+export {INITIAL_GAME, levels, Result, GameSpeed, AnswerType, ATTEMPTS_COUNT};
