@@ -1,74 +1,77 @@
 import {render, changeScreen} from '../utils';
-import {INITIAL_GAME, levels} from '../data/game-state';
-import header from '../page_elements/header';
+import {INITIAL_GAME, levels, Result} from '../data/game-state';
+import {die, canContinue, changeLevel, updateGameState} from '../rules';
+
+import HeaderView from '../game/header-view';
+
+/*
 import footer from '../page_elements/footer';
-import introScreen from './intro';
 import statsScreen from './game-over';
+*/
 
 // container element
 const gameContainerElement = render();
 
+// render wrappers
 const headerElement = render();
 const levelElement = render();
-const footerElement = render(footer());
+const footerElement = render();
 
 // init game content
 gameContainerElement.appendChild(headerElement);
 gameContainerElement.appendChild(levelElement);
 gameContainerElement.appendChild(footerElement);
 
-const updateGame = (levelHtml) => {
-  headerElement.innerHTML = header(game);
-  levelElement.innerHTML = levelHtml;
-};
-
-// start over
-const backHandler = (evt) => {
-  const element = evt.target;
-  if (element.alt === `Back`) {
-    evt.currentTarget.removeEventListener(`click`, backHandler);
-    introScreen();
-  }
-};
+// state container
+let game;
 
 const getLevel = (levelNum) => levels[`level-${levelNum}`];
 
-const onGameChange = (evt) => {
-  try {
-    const currentLevel = getLevel(game.level);
-    const nextLevel = getLevel(game.level + 1);
+const onAnswer = (answer) => {
+  debugger;
+  const nextLevel = getLevel(game.level + 1);
 
-    game = currentLevel.getState(game, currentLevel, evt);
+  switch (answer.result) {
+    case Result.NEXT:
+      game = changeLevel(game, game.level + 1);
+      break;
+    case Result.DIE:
+      game = die(game, answer);
+      break;
+    case Result.NOOP:
+      // nope
+      return void 0;
+  }
 
+  if (nextLevel && canContinue(game)) {
+    updateGame(game);
+    game = updateGameState(game, answer);
+  } else {
     // game over
-    if (game.lives < 0 || !nextLevel) {
-      gameOver();
-      return;
-    }
-
-    updateGame(nextLevel.render(game, nextLevel));
-  } catch (error) {
-    // ups something unexpected happen
   }
 };
 
-const gameOver = () => {
-  gameContainerElement.removeEventListener(`click`, onGameChange);
-  gameContainerElement.removeEventListener(`change`, onGameChange);
-  statsScreen(game);
+// GAME
+const updateView = (container, view) => {
+  container.innerHTML = ``;
+  container.appendChild(view.element);
 };
 
-gameContainerElement.addEventListener(`click`, onGameChange);
-gameContainerElement.addEventListener(`click`, backHandler);
-gameContainerElement.addEventListener(`change`, onGameChange);
 
-let game;
+const updateGame = (state) => {
+  updateView(headerElement, new HeaderView(state));
 
+  const level = getLevel(game.level);
+  const view = level.view;
+  const levelView = view(game, level);
+
+  levelView.onAnswer = onAnswer;
+  updateView(levelElement, levelView);
+};
 
 export default () => {
   game = Object.assign({}, INITIAL_GAME);
 
-  const currentLevel = getLevel(game.level);
-  updateGame(currentLevel.render(game, currentLevel));
+  updateGame(game);
   changeScreen(gameContainerElement);
 };

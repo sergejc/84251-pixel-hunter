@@ -1,5 +1,5 @@
 import {render, changeScreen} from '../utils';
-import getFooter from '../page_elements/footer';
+import footer from '../page_elements/footer';
 import rulesScreen from './rules';
 
 export default () => {
@@ -16,7 +16,7 @@ export default () => {
       </div>
       <div class="greeting__continue"><span><img src="img/arrow_right.svg" width="64" height="64" alt="Next"></span></div>
     </div>
-    ${getFooter()}`;
+    ${footer}`;
 
   const element = render(html);
 

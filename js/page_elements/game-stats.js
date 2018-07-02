@@ -1,29 +1,31 @@
+import {GameSpeed, ATTEMPTS_COUNT, AnswerType} from '../data/game-state';
+
 const getTypeByTime = (time) => {
-  if (time < 10) {
-    return `fast`;
+  if (time < GameSpeed.FAST) {
+    return AnswerType.FAST;
   }
 
-  if (time > 20) {
-    return `slow`;
+  if (time > GameSpeed.SLOW) {
+    return AnswerType.SLOW;
   }
 
-  return `correct`;
+  return AnswerType.CORRECT;
 };
 
 const getGameStatus = (stat) => {
   if (!stat) {
-    return `unknown`;
+    return AnswerType.UNKNOWN;
   }
 
   if (!stat.answer) {
-    return `wrong`;
+    return AnswerType.WRONG;
   }
 
   return getTypeByTime(stat.time);
 };
 
 const convertToTypes = (stats) => {
-  return [...Array(10).keys()].map((key) => {
+  return [...Array(ATTEMPTS_COUNT).keys()].map((key) => {
     return getGameStatus(stats[key]);
   });
 };
