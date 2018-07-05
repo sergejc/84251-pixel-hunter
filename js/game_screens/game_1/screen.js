@@ -1,5 +1,5 @@
 import {gameStats} from '../../page_elements/game-stats';
-import AbstractView from '../../abstract-view';
+import AbstractView from '../../view/abstract-view';
 import {Result} from '../../data/game-state';
 
 export default class LevelView1 extends AbstractView {

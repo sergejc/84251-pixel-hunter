@@ -1,3 +1,3 @@
-import introScreen from './game_screens/intro';
+import introScreen from './game/intro';
 
 introScreen();

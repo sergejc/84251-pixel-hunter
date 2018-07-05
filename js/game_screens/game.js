@@ -2,7 +2,7 @@ import {render, changeScreen} from '../utils';
 import {INITIAL_GAME, levels, Result} from '../data/game-state';
 import {die, canContinue, changeLevel, updateGameState} from '../rules';
 
-import HeaderView from '../game/header-view';
+import HeaderView from '../view/header-view';
 
 /*
 import footer from '../page_elements/footer';
@@ -28,12 +28,15 @@ let game;
 const getLevel = (levelNum) => levels[`level-${levelNum}`];
 
 const onAnswer = (answer) => {
-  debugger;
   const nextLevel = getLevel(game.level + 1);
 
   switch (answer.result) {
     case Result.NEXT:
-      game = changeLevel(game, game.level + 1);
+      game = updateGameState(game, {time: answer.time, result: 1});
+      if (nextLevel) {
+        game = changeLevel(game, game.level + 1);
+
+      }
       break;
     case Result.DIE:
       game = die(game, answer);
